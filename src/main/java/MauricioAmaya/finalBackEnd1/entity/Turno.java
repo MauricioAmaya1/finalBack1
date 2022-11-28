@@ -10,27 +10,23 @@ import java.time.LocalDate;
 
 @Entity
 @Table
+@Getter @Setter
 public class Turno {
 
     @Id
-    @SequenceGenerator(name = "turno_sequence", sequenceName = "turno_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "turno_sequence")
-    @Getter
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter @Setter
     @ManyToOne()
     @JoinColumn(name = "paciente_id", nullable = false)
     @JsonIgnoreProperties({"turnos"})
     private Paciente paciente;
 
-    @Getter @Setter
     @ManyToOne()
     @JoinColumn(name = "odontologo_id", nullable = false)
     @JsonIgnoreProperties({"turnos"})
     private Odontologo odontologo;
 
-    @Getter @Setter
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fecha;
 

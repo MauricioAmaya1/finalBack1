@@ -8,26 +8,30 @@ import javax.persistence.*;
 
 @Entity
 @Table
+@Getter
+@Setter
 public class Domicilio {
 
     @Id
-    @SequenceGenerator(name = "domicilio_sequence", sequenceName = "domicilio_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "domicilio_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Getter
-    @Setter
     private String calle;
-    @Getter @Setter
     private Integer numero;
-    @Getter @Setter
     private String localidad;
-    @Getter @Setter
     private String provincia;
 
     public Domicilio() {
     }
 
     public Domicilio( String calle, Integer numero, String localidad, String provincia) {
+        this.calle = calle;
+        this.numero = numero;
+        this.localidad = localidad;
+        this.provincia = provincia;
+    }
+
+    public Domicilio(Long id, String calle, Integer numero, String localidad, String provincia) {
+        this.id = id;
         this.calle = calle;
         this.numero = numero;
         this.localidad = localidad;

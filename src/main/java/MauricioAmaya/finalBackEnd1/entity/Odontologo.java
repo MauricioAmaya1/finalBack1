@@ -9,17 +9,13 @@ import java.util.Set;
 
 @Entity
 @Table
+@Getter @Setter
 public class Odontologo {
     @Id
-    @SequenceGenerator(name = "odontologo_sequence", sequenceName = "odontologo_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "odontologo_sequence")
-    @Getter
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Getter @Setter
     private String nombre;
-    @Getter @Setter
     private String apellido;
-    @Getter @Setter
     private Integer matricula;
 
     @JsonIgnoreProperties({"odontologo"})
