@@ -1,8 +1,11 @@
 package MauricioAmaya.finalBackEnd1.controller;
 
 
+import MauricioAmaya.finalBackEnd1.entity.Odontologo;
 import MauricioAmaya.finalBackEnd1.entity.Paciente;
 import MauricioAmaya.finalBackEnd1.entity.Turno;
+import MauricioAmaya.finalBackEnd1.service.OdontologoService;
+import MauricioAmaya.finalBackEnd1.service.PacienteService;
 import MauricioAmaya.finalBackEnd1.service.TurnoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,14 +21,29 @@ import java.util.Optional;
 public class TurnoController {
 
     private TurnoService turnoService;
+
+    private PacienteService pacienteService;
+    private OdontologoService odontologoService;
+
     @Autowired
-    public TurnoController(TurnoService turnoService) {
+    public TurnoController(TurnoService turnoService, PacienteService pacienteService, OdontologoService odontologoService) {
         this.turnoService = turnoService;
+        this.pacienteService = pacienteService;
+        this.odontologoService = odontologoService;
     }
 
     @PostMapping
     public ResponseEntity<Turno> guardarTurno(@RequestBody Turno turno){
-        return ResponseEntity.ok(turnoService.guardarTurno(turno));
+        Optional<Paciente> pacienteBuscado = pacienteService.buscarPaciente(turno.getPaciente().getId());
+        Optional<Odontologo> odontologoBuscado = odontologoService.buscarOdontologo(turno.getOdontologo().getId());
+
+        if (pacienteBuscado.isPresent() && odontologoBuscado.isPresent()){
+            turno.setPaciente(pacienteBuscado.get());
+            turno.setOdontologo(odontologoBuscado.get());
+            return ResponseEntity.ok(turnoService.guardarTurno(turno));
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/{id}")

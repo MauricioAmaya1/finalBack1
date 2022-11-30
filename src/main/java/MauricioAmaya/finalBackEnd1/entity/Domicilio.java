@@ -8,8 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table
-@Getter
-@Setter
+@Getter @Setter
 public class Domicilio {
 
     @Id
@@ -24,14 +23,6 @@ public class Domicilio {
     }
 
     public Domicilio( String calle, Integer numero, String localidad, String provincia) {
-        this.calle = calle;
-        this.numero = numero;
-        this.localidad = localidad;
-        this.provincia = provincia;
-    }
-
-    public Domicilio(Long id, String calle, Integer numero, String localidad, String provincia) {
-        this.id = id;
         this.calle = calle;
         this.numero = numero;
         this.localidad = localidad;
