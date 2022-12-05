@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>turnos</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/get_turno.js"></script>
+    <script type="text/javascript" src="/js/delete_turno.js"></script>
+    <script type="text/javascript" src="/js/up_turno.js"></script>
+</head>
+<body style="background-color: #121212 ; color: #FFF; " >
+  <div class="container">
+  <nav class="container d-flex flex-column flex-md-row justify-content-between" style="margin-top: 10px;">
+    <a href="alta-turnos.html">Agregar turno</a>
+    <div>
+        <form id="buscar_id">
+            <div class="form-group">
+                <input type="text" class="form-control" id="buscar" name="buscar" placeholder="Buscar"
+                style="background-color: #121212; color: #FFF;"></input>
+            </div>
+        </form>
+    </div>
+    <a href="index.html">Volver al inicio</a>
+  </nav>
+    <div id="div_turno_table" style="margin: 10px;">
+        <h2>Turnos registrados</h2>
+        <div class="row col-md-12 table-responsive" style="overflow: visible" >
+            <table id="turnoTable" class="table table-striped" style="color: #FFF; ">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Fecha</th>
+                    <th>Odontologo Nombre</th>
+                    <th>Odontologo Apellido</th>
+                    <th>Paciente Nombre</th>
+                    <th>Paciente Apellido</th>
+                    <th>Eliminar</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr>
+      <div class="col-sm-6" style="display: none; background-color:#454545; padding:10px; border-radius:3px" id="div_turno_updating">
+          <form id="update_turno_form">
+              <div class="form-group">
+                  <label class="control-label" for="fecha">Fecha Ingreso: </label>
+                  <input type="date" class="form-control" id="fecha" name="fecha"></input>
+              </div>
+              <div class="form-group">
+                  <label class="control-label" for="paciente">Paciente:</label>
+                  <select name="paciente" class="form-control" id="paciente">
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label class="control-label" for="odontologo">Odontologo:</label>
+                  <select name="odontologo" class="form-control" id="odontologo">
+                  </select>
+              </div>
+              <button type="submit" class="btn btn-danger" id="btn-add-new-turno">Cargar</button>
+          </form>
+      </div>
+
+</div>
+</body>
+</html>

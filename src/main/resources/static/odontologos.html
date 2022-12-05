@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>odontologos</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body  style="background-color: #121212 ; color: #FFF; " ></body>
+<div class="container">
+  <nav class="container d-flex flex-column flex-md-row justify-content-between" style="margin-top: 10px;">
+    <a class="nav-link" href="alta-odontologos.html">Agregar nuevo</a>
+    <div>
+        <form id="buscar_id">
+            <div class="form-group">
+                <input type="text" class="form-control" id="buscar" name="buscar" placeholder="Buscar" required 
+                style="background-color: #121212; color: #FFF;"></input>
+            </div>
+        </form>
+    </div>
+    <a class="nav-link" href="index.html">Volver al inicio</a>
+  </nav>
+    <div id="div_odontologo_table">
+        <h2>Listado odontólogos</h2>
+        <div class="row col-md-12 table-responsive">
+            <table id="odontologoTable" class="table table-striped" style="color: #FFF">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Matricula</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6" style="display: none;	background-color:#e6fffa; padding:10px; border-radius:3px"  id="div_odontologo_updating">
+            <form id="update_odontologo_form">
+                <div class="form-group">
+                    <label for="odontologo_id">Id:</label>
+                    <input type="text" class="form-control" id="odontologo_id" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" placeholder="nombre" id="nombre">
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" class="form-control" placeholder="apellido" id="apellido">
+                </div>
+                <div class="form-group">
+                    <label for="matricula">Matricula:</label>
+                    <input type="text" class="form-control" placeholder="matricula" id="matricula">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <div id="response" style="display:none; margin:10px">
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+</div>
+<script type="text/javascript" src="/js/get_odontologo.js"></script>
+<script type="text/javascript" src="/js/update_odontologo.js"></script>
+<script type="text/javascript" src="/js/delete_odontologo.js"></script>
+</body>
+</html>

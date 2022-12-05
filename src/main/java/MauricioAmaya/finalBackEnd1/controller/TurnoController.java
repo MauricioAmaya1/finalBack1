@@ -31,7 +31,7 @@ public class TurnoController {
         this.odontologoService = odontologoService;
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<TurnoDTO> guardarTurno(@RequestBody TurnoDTO turnoDTO){
             return ResponseEntity.ok(turnoService.guardarTurno(turnoDTO));
 

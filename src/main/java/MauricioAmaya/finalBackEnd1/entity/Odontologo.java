@@ -1,10 +1,12 @@
 package MauricioAmaya.finalBackEnd1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,9 +20,10 @@ public class Odontologo {
     private String apellido;
     private Integer matricula;
 
-    @JsonIgnoreProperties({"odontologo"})
-    @OneToMany(mappedBy = "odontologo", cascade = CascadeType.ALL)
-    private Set<Turno> turnos;
+
+    @OneToMany(mappedBy = "odontologo", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Turno> turnos =  new HashSet<>();
 
     public Odontologo() {
     }

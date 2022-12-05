@@ -11,6 +11,8 @@ import java.util.Optional;
 
 @Service
 public class PacienteService {
+
+    //PONER LOS LOGGER EN TODOS LOS SERVICE
     private PacienteRepository pacienteRepository;
     @Autowired
     public PacienteService(PacienteRepository pacienteRepository) {

@@ -15,6 +15,8 @@ import java.util.Optional;
 @Service
 public class TurnoService {
 
+    //PONER LOS LOGGER EN TODOS LOS SERVICE
+
     private TurnoRepository turnoRepository;
     @Autowired
     public TurnoService (TurnoRepository turnoRepository){
@@ -63,8 +65,11 @@ public class TurnoService {
         TurnoDTO respuesta = new TurnoDTO();
         respuesta.setId(turno.getId());
         respuesta.setFecha(turno.getFecha());
-        respuesta.setOdontologoId(turno.getOdontologo().getId());
-        respuesta.setPacienteId(turno.getPaciente().getId());
+        respuesta.setOdontologo(turno.getOdontologo());
+        respuesta.setPaciente(turno.getPaciente());
+
+        //respuesta.setOdontologoId(turno.getOdontologo().getId());
+        //respuesta.setPacienteId(turno.getPaciente().getId());
         return respuesta;
     }
 
@@ -75,8 +80,8 @@ public class TurnoService {
         Paciente paciente = new Paciente();
         Odontologo odontologo = new Odontologo();
         // cargar elemementos
-        paciente.setId(turnoDTO.getPacienteId());
-        odontologo.setId(turnoDTO.getOdontologoId());
+        paciente.setId(turnoDTO.getPaciente().getId());
+        odontologo.setId(turnoDTO.getOdontologo().getId());
         turno.setFecha(turnoDTO.getFecha());
         // asociar elelmentmos
         turno.setPaciente(paciente);

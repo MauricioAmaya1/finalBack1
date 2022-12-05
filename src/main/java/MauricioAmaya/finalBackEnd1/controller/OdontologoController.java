@@ -22,7 +22,7 @@ public class OdontologoController {
         this.odontologoService = odontologoService;
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<Odontologo> guardarOdontologo(@RequestBody Odontologo odontologo){
         return ResponseEntity.ok(odontologoService.guardarOdontologo(odontologo));
     }

@@ -1,6 +1,7 @@
 package MauricioAmaya.finalBackEnd1.controller;
 
 import MauricioAmaya.finalBackEnd1.entity.Paciente;
+import MauricioAmaya.finalBackEnd1.exceptions.ResourcesNotFoundException;
 import MauricioAmaya.finalBackEnd1.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,13 +22,13 @@ public class PacienteController {
         this.pacienteService = pacienteService;
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<Paciente> guardarPaciente(@RequestBody Paciente paciente){
         return ResponseEntity.ok(pacienteService.guardarPaciente(paciente));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarPaciente(@PathVariable Long id){
+    public ResponseEntity<String> eliminarPaciente(@PathVariable Long id) throws ResourcesNotFoundException{
         Optional<Paciente> pacienteBuscado=pacienteService.buscarPaciente(id);
         if (pacienteBuscado.isPresent()){
             pacienteService.eliminarPaciente(id);
@@ -35,8 +36,11 @@ public class PacienteController {
                     "con id= "+id);
         }
         else{
-            return ResponseEntity.badRequest().body("No se encuentra un paciente con id= "
+            throw new ResourcesNotFoundException("No se encuentra un paciente con id= "
                     +id+" . Verificar el ingreso.");
+
+            //return ResponseEntity.badRequest().body("No se encuentra un paciente con id= "
+                    //+id+" . Verificar el ingreso.");
         }
     }
 
