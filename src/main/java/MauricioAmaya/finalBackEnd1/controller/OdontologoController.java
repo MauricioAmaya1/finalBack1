@@ -2,6 +2,7 @@ package MauricioAmaya.finalBackEnd1.controller;
 
 
 import MauricioAmaya.finalBackEnd1.entity.Odontologo;
+import MauricioAmaya.finalBackEnd1.exceptions.ResourcesNotFoundException;
 import MauricioAmaya.finalBackEnd1.service.OdontologoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class OdontologoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarOdontologo(@PathVariable Long id){
+    public ResponseEntity<String> eliminarOdontologo(@PathVariable Long id) throws ResourcesNotFoundException {
         Optional<Odontologo> odontologoBuscado = odontologoService.buscarOdontologo(id);
         if (odontologoBuscado.isPresent()){
             odontologoService.eliminarOdontologo(id);
@@ -36,7 +37,7 @@ public class OdontologoController {
                     "con id= "+id);
         }
         else{
-            return ResponseEntity.badRequest().body("No se encuentra un odontologo con id= "
+            throw new ResourcesNotFoundException("No se encuentra un odontologo con id= "
                     +id+" . Verificar el ingreso.");
         }
     }
@@ -72,12 +73,6 @@ public class OdontologoController {
             return ResponseEntity.notFound().build();
         }
     }
-
-
-
-
-
-
 
 
 }

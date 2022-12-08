@@ -12,9 +12,6 @@ window.addEventListener('load', function () {
         const formData = {
             id: document.querySelector('#turno_id').value,
             fecha: document.querySelector('#fecha').value,
-            paciente: document.querySelector('#paciente_id').value,
-            odontologo: document.querySelector('#odontologo_id').value,
-
         };
 
         //invocamos utilizando la función fetch la API peliculas con el método PUT que modificará
@@ -44,11 +41,9 @@ window.addEventListener('load', function () {
               let turno = data;
               document.querySelector('#turno_id').value = turno.id;
               document.querySelector('#fecha').value = turno.fecha;
-              document.querySelector('#odontologo').value = turno.odontologo.id;
-              document.querySelector('#paciente').value = turno.paciente.id;
 
               document.querySelector('#div_turno_updating').style.display = "block";
           }).catch(error => {
-              alert("Error: " + error);
+              alert("Error al actualizar: " + error);
           })
    }

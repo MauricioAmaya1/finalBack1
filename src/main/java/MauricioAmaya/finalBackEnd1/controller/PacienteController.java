@@ -36,6 +36,7 @@ public class PacienteController {
                     "con id= "+id);
         }
         else{
+
             throw new ResourcesNotFoundException("No se encuentra un paciente con id= "
                     +id+" . Verificar el ingreso.");
 

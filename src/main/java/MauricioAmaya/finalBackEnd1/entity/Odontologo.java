@@ -1,7 +1,6 @@
 package MauricioAmaya.finalBackEnd1.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +20,7 @@ public class Odontologo {
     private Integer matricula;
 
 
-    @OneToMany(mappedBy = "odontologo", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "odontologo", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<Turno> turnos =  new HashSet<>();
 
@@ -29,6 +28,13 @@ public class Odontologo {
     }
 
     public Odontologo(String nombre, String apellido, Integer matricula) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.matricula = matricula;
+    }
+
+    public Odontologo(Long id, String nombre, String apellido, Integer matricula) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.matricula = matricula;

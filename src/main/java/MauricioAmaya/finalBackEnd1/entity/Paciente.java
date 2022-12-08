@@ -29,7 +29,7 @@ public class Paciente {
     @JoinColumn(name = "domicilio_id", referencedColumnName = "id")
     private Domicilio domicilio;
 
-    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<Turno> turnos = new HashSet<>();
 
@@ -42,6 +42,17 @@ public class Paciente {
         this.apellido = apellido;
         this.dni = dni;
         this.fecha = fechaIngreso;
+        this.email = email;
+        this.domicilio = domicilio;
+    }
+
+
+    public Paciente(Long id, String nombre, String apellido, String dni, LocalDate fecha, String email, Domicilio domicilio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.fecha = fecha;
         this.email = email;
         this.domicilio = domicilio;
     }

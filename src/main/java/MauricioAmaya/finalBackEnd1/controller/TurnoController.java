@@ -4,6 +4,7 @@ package MauricioAmaya.finalBackEnd1.controller;
 import MauricioAmaya.finalBackEnd1.dto.TurnoDTO;
 import MauricioAmaya.finalBackEnd1.entity.Odontologo;
 import MauricioAmaya.finalBackEnd1.entity.Paciente;
+import MauricioAmaya.finalBackEnd1.exceptions.ResourcesNotFoundException;
 import MauricioAmaya.finalBackEnd1.service.OdontologoService;
 import MauricioAmaya.finalBackEnd1.service.PacienteService;
 import MauricioAmaya.finalBackEnd1.service.TurnoService;
@@ -38,7 +39,7 @@ public class TurnoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarTurno(@PathVariable Long id){
+    public ResponseEntity<String> eliminarTurno(@PathVariable Long id) throws ResourcesNotFoundException {
         Optional<TurnoDTO> turnoBuscado = turnoService.buscarTurno(id);
         if (turnoBuscado.isPresent()){
             turnoService.eliminarTurno(id);
@@ -46,7 +47,7 @@ public class TurnoController {
                     "con id= "+id);
         }
         else{
-            return ResponseEntity.badRequest().body("No se encuentra un turno con id= "
+            throw new ResourcesNotFoundException("No se encuentra un turno con id= "
                     +id+" . Verificar el ingreso.");
         }
     }

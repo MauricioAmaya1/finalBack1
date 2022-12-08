@@ -5,6 +5,7 @@ import MauricioAmaya.finalBackEnd1.entity.Odontologo;
 import MauricioAmaya.finalBackEnd1.entity.Paciente;
 import MauricioAmaya.finalBackEnd1.entity.Turno;
 import MauricioAmaya.finalBackEnd1.repository.TurnoRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,15 @@ public class TurnoService {
     //PONER LOS LOGGER EN TODOS LOS SERVICE
 
     private TurnoRepository turnoRepository;
+
+    private static final Logger LOGGER = Logger.getLogger(TurnoService.class);
     @Autowired
     public TurnoService (TurnoRepository turnoRepository){
         this.turnoRepository = turnoRepository;
     }
 
     public TurnoDTO guardarTurno (TurnoDTO turnoDTO){
+        LOGGER.info("Se inicio un guardado de turno");
 
         Turno turnoAGuardar = turnoDtoATurno(turnoDTO);
         Turno turnoGuardado = turnoRepository.save(turnoAGuardar);
@@ -31,14 +35,17 @@ public class TurnoService {
         return turnoATurnoDTO(turnoGuardado);
     }
     public void eliminarTurno(Long id){
+        LOGGER.info("Se inicio una eliminacion de turno");
         turnoRepository.deleteById(id);
     }
     public void actualizarTurno(TurnoDTO turnoDTO){
+        LOGGER.info("Se inicio una actualizacion de turno");
         Turno turnoAActualizat= turnoDtoATurno(turnoDTO);
         turnoRepository.save(turnoAActualizat);
     }
 
     public Optional<TurnoDTO> buscarTurno(Long id){
+        LOGGER.info("Se inicio una busqueda por id de turno");
         Optional<Turno> turnoBuscado = turnoRepository.findById(id);
         if (turnoBuscado.isPresent()){
             return Optional.of(turnoATurnoDTO(turnoBuscado.get())); // con el .get sacamos el opcional del turno
@@ -49,6 +56,8 @@ public class TurnoService {
     }
 
     public List<TurnoDTO> buscarTodosTurnos(){
+        LOGGER.info("Se inicio una busqueda de turnos");
+
         List<Turno> turnosEncontrados = turnoRepository.findAll();
         List<TurnoDTO> respuesta =  new ArrayList<>();
 
@@ -68,8 +77,6 @@ public class TurnoService {
         respuesta.setOdontologo(turno.getOdontologo());
         respuesta.setPaciente(turno.getPaciente());
 
-        //respuesta.setOdontologoId(turno.getOdontologo().getId());
-        //respuesta.setPacienteId(turno.getPaciente().getId());
         return respuesta;
     }
 

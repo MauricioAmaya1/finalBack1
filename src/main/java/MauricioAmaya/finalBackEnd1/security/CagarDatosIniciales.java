@@ -26,10 +26,13 @@ public class CagarDatosIniciales implements ApplicationRunner {
         BCryptPasswordEncoder cifrador = new BCryptPasswordEncoder();
 
         String passCifrada = cifrador.encode("admin");
+        String passCifrada1 = cifrador.encode("user");
 
-        Usuario usuario = new Usuario("Mauricio","Mauri","admin",passCifrada, UsuarioRole.ROLE_USER);
+        Usuario usuario = new Usuario("Mauricio","Mauri","admin",passCifrada, UsuarioRole.ROLE_ADMIN);
+        Usuario usuario1 = new Usuario("Mauri","Mauri","user",passCifrada1, UsuarioRole.ROLE_USER);
 
         usuarioRepository.save(usuario);
+        usuarioRepository.save(usuario1);
 
 
     }
